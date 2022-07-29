@@ -1,4 +1,4 @@
-interface Album{
-    id?:number,name?:string,area?:number,price?:number
+
+export interface Album {
+    id?: number, name?: string, area?: string, price?: number
 }
-export default Album

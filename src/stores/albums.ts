@@ -1,9 +1,8 @@
 import AlbumViewVue from '@/views/AlbumView.vue'
 import { defineStore } from 'pinia'
 
-interface Album {
-    id?: number, name?: string, area?: number, price?: number
-}
+import type  {Album} from '../model/album'
+
 const url="http://johnyu.cn:3000/albums/"
 export const useAlbumsStore = defineStore({
     id: 'albums',

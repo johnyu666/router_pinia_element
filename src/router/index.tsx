@@ -38,7 +38,8 @@ const router = createRouter({
     {
       path: '/albums/:id',
       name: 'albums',
-      component: AlbumView
+      component: AlbumView,
+      props:true
     }
   ]
 })

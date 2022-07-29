@@ -17,27 +17,33 @@
                 </el-tag>
             </div>
             <div>发布日期：{{ store.selectedAlbum.releaseDate }}</div>
-
         </div>
     </el-card>
     <br>
-
-
 </template>
 <script lang="ts" setup>
 import { watch } from 'vue';
 import { useRoute } from 'vue-router'
-import { useAlbumsStore } from '../stores/albums.ts'
+
+import { useAlbumsStore } from '../stores/albums'
+
 const route = useRoute()
 const store = useAlbumsStore()
+const props=defineProps({
+    id:Number
+})
+
 const randomType = () => {
     let types = ['primary', 'warning', 'danger', 'success']
     let index = Math.floor(Math.random() * 4)
     return types[index]
 }
-watch(route, () => {
-    store.load(route.params.id)
-}, { immediate: true })
+// watch(()=>route.params.id, (id) => {
+//     store.load(id)
+// }, { immediate: true })
+
+watch(()=>props.id,(id)=>store.load(id),{immediate:true})
+
 </script>
 <style scoped>
 .title {

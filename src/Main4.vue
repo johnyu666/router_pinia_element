@@ -103,10 +103,7 @@
                 </div>
             </template>
         </el-skeleton>
-
     </el-drawer>
-
-
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
@@ -114,13 +111,14 @@ import { useRouter } from 'vue-router'
 import { useAlbumsStore } from './stores/albums.js'
 import { Menu, Headset, InfoFilled } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
+import type { Album } from './model/album.js'
 
 // const albums=ref([{id:1,name:"john"},{id:2,name:"tom"}])
 let showUpdate = ref(false)
 let showDrawer = ref(false)
 let showMore = ref(false)
-let current = ref({})
-let newAlbum = ref({ name: 'john', price: 23, area: "内地" })
+let current = ref<Album>({})
+let newAlbum = ref<Album>({ name: 'john', price: 23, area: "内地" })
 
 
 let store = useAlbumsStore()
@@ -131,7 +129,8 @@ store.findAll()
 function priceFormatter(row: object, column: object, price: number, index: number) {
     return "￥ " + price
 }
-function updating(album) {
+
+function updating(album:Album) {
     showUpdate.value = true
     Object.assign(current.value, album)
 }
@@ -159,14 +158,13 @@ function add() {
     })
 }
 
-function delAlbum(id) {
+function delAlbum(id:number) {
     if (id < 14) {
         ElMessageBox.alert("系统原有数据，做冻结处理，您可删除追加的唱片", "数据冻结")
     }
     else {
         store.deleteAlbum(id)
     }
-
 }
 
 function handleSelect(key: string, keyPath: string[]) {
@@ -177,11 +175,8 @@ function handleSelect(key: string, keyPath: string[]) {
         case "0":
             showMore.value = true;
             break;
-
     }
-
 }
-
 </script>
 <style scoped>
 </style>
